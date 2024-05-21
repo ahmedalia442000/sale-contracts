@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record model="ir.ui.view" id="view_sale_contract_tree">
+      <field name="name">sale.contract.tree</field>
+      <field name="model">sale.contract</field>
+      <field name="arch" type="xml">
+        <tree>
+<field name="customer"/>
+
+
+
+
+        </tree>
+      </field>
+</record>
+
+    <record model="ir.ui.view" id="view_sale_contract_form">
+        <field name="name">sale.contract.form</field>
+        <field name="model">sale.contract</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group class="oe_left">
+                        <field name="customer" />
+                        <field name="company_id" />
+                        <field name="currency_id" />
+                        <field name="first_payment_date" />
+                        <field name="quotation_date" />
+                        <field name="responding" />
+                    </group>
+
+
+                    <group class="oe_right">
+                        <field name="date"/>
+                        <field name="sal_order"/>
+                        <field name="date_day"/>
+                        <field name="first_batch"/>
+                        <field name="second_batch"/>
+                        <field name="num_of_payment"/>
+                        <field name="warranty_period"/>
+                        <field name="consumables"/>
+
+                    </group>
+                    <notebook>
+                        <page name="contract_lines" string="Contract Lines">
+
+                            <field name="contract_lines_ids">
+                                <tree editable="bottom">
+                                    <field name="num"/>
+                                    <field name="products_id"/>
+                                    <field name="quantaty"/>
+                                    <field name="price_unit"/>
+                                    <field name="discount"/>
+                                    <field name="taxes"/>
+                                    <field name="price_total"/>
+                                    <field name="tax_amount"/>
+                                    <field name="price_Sub_total"/>
+
+
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="products_id" class="oe_left"/>
+                                        <div class="oe_align-center">
+                                            <field name="quantaty"/>
+                                            <field name="price_unit"/>
+                                            <field name="discount"/>
+                                            <field name="taxes"/>
+                                        </div>
+                                        <div class="oe_right">
+                                            <field name="price_Sub_total"/>
+                                            <field name="price_total"/>
+                                            <field name="tax_amount"/>
+                                        </div>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page name='installments' string="Installments">
+
+                        </page>
+                    </notebook>
+                    <div class="oe_right">
+                        <group>
+                        <field name="united_amount" widget='monetary'/>
+                        <field name="amount_tax" widget='monetary'/>
+                            <separator class="line"/>
+                        <field name="total_amount" widget='monetary'/>
+                        </group>
+                    </div>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" options="{'open_attachments': True}"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+
+            </form>
+
+        </field>
+    </record>
+    <record id="action_sale_contract" model="ir.actions.act_window">
+        <field name="name"> Sale Contract</field>
+        <field name="res_model">sale.contract</field>
+        <field name="view_mode">tree,form</field>
+         <field name="context" eval="{}"/>
+    <field name="help" type="html">
+    <p class="o_view_nocontent_smiling_face">  create your Operations</p>
+    </field>
+    </record>
+ <menuitem id="menu_sale_contract" name="Sale Contract" parent="sale.sale_order_menu" action="action_sale_contract"/>
+
+</odoo>
+
